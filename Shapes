@@ -1,19 +1,19 @@
-let [yn,zn]=nmax(y,z);
+let [xn,yn,zn]=nmax(x,y,z);
 //zn+=2*Math.cos(y/2)
 let c0=[0,0,8]; // Centre of shape
-let c=[x,yn,zn]; // Coordinate
+let c=[xn,yn,zn]; // Coordinate
 let r=14;
 let t = 3; // Wall thickness (r = filled)
 let l = [12,12,12] //
-//ethsphere(c,c0,r,t,2) // Create sphere
+ethsphere(c,c0,r,t,2) // Create sphere
 //randcol([3,0,5],[0.05,0.9])
 //ethcube(c,c0,l,t,2) // Create sphere
 //randcol() // Randomise colours
 //ethcube(c,c0,l,t,0) // Create sphere
 //ethplane(z+4*Math.cos(y/4)+4*Math.cos(x/2),10,3,6)
-//ethtube([x,yn,zn],c0,14,3,4,10)
+ethtube([xn,yn,zn],c0,14,3,4,10)
 
-ethnut([x,zn,yn],[0,0,20],16,12,4,6)
+//ethnut([x,yn,zn],[0,0,20],16,12,4,6)
 
 // Shapes
 
@@ -48,10 +48,11 @@ function ethpyramid(){}
 function ethhex(){}
 
 // Other functions
-function nmax(y,z){
-  let yn = y*(Math.sqrt(3))/2; 
+function nmax(x,y,z){
+    let xn = x + 0.5*(Math.abs(y)%2);
+    let yn = y*(Math.sqrt(3))/2;; 
     let zn = z/1.6; // Normalise y and z dimensions to units of x
-  return [yn,zn]
+  return [xn,yn,zn]
 }
 function randcol(p,k){ // Recolour with colours p and probability k
   if (buildArray[i]>0){
