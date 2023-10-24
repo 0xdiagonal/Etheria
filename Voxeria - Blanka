@@ -1,24 +1,38 @@
-let yn = y*(Math.sqrt(3))/2; let zn = z/1.6; // Normalise y and z dimensions to units of x
+let cv=[[]];
+cv[0][0]=[1,1,0,0,0,2,2,0];
+cv[0][1]=[4,1,1,0,5,5,2,2];
+cv[0][2]=[1,1,1,2,2,5,0,2];
+cv[0][3]=[1,1,2,4,1,1,1,0];
+cv[0][4]=[1,1,2,1,1,1,2,0];
+cv[0][5]=[3,3,3,1,1,6,1,0];
+cv[0][6]=[0,4,3,3,1,1,1,0];
+cv[0][7]=[4,3,3,3,3,3,4,0]; 
+
+//cv=[[],[],[],[],[],[],[],[]];
+//cv[0][0]=[1,1,0,0,0,2,2,0];
+//cv[1][0]=[4,1,1,0,5,5,2,2];
+//cv[2][0]=[1,1,1,2,2,5,0,2];
+//cv[3][0]=[1,1,2,4,1,1,1,0];
+//cv[4][0]=[1,1,2,1,1,1,2,0];
+//cv[5][0]=[3,3,3,1,1,6,1,0];
+//cv[6][0]=[0,4,3,3,1,1,1,0];
+//cv[7][0]=[4,3,3,3,3,3,4,0]; 
+
 let cn=[0,15,14,18,4,22,40]; // Select colours from the palette
-let np=[8,1,8]; // Number of pixels [x,y,z]
+
 let d=[8,8,8]; // Dimensions [x,y,z]
+let o=[0,1,2] // For swapping dimensions (Not working)
+
+  // Assign colours to voxels (loops x=>y=>z)
+
+let np=[cv[0][0].length,cv.length,cv[0].length]; // Number of pixels [x,y,z]
 let s=[-np[0]*d[0]/2,-np[1]*d[1]/2,0]; // Shift location
-let cv=[1,1,0,0,0,2,2,0,
-        4,1,1,0,5,5,2,2,
-       1,1,1,2,2,5,0,2,
-       1,1,2,4,1,1,1,0,
-       1,1,2,1,1,1,2,0,
-       3,3,3,1,1,6,1,0,
-       0,4,3,3,1,1,1,0,
-       4,3,3,3,3,3,4,0];   // Assign colours to voxels (loops x=>y=>z)
-
-
-let ix=0;
-for (let l=0;l<np[2];l++){
-  for (let k=0;k<np[1];k++){
-    for (let j=0;j<np[0];j++){
-	if (zn>=(d[2]*l+s[2])&&(zn<d[2]*(l+1)+s[2])&&x>=(d[0]*j+s[0])&&x<(d[0]*(j+1)+s[0])&&yn>=(d[1]*k+s[1])&&yn<(d[1]*(k+1)+s[1])){buildArray[i]=cn[cv[ix]]} 
-    ix+=1;
+y = y*(Math.sqrt(3))/2; z = z/1.6; // Normalise y and z dimensions to units of x
+for (let l=0;l<np[o[2]];l++){
+  for (let k=0;k<np[o[1]];k++){
+    for (let j=0;j<np[o[0]];j++){
+  if (z>=(d[2]*l+s[2])&&(z<d[2]*(l+1)+s[2])&&x>=(d[0]*j+s[0])&&x<(d[0]*(j+1)+s[0])&&y>=(d[1]*k+s[1])&&y<(d[1]*(k+1)+s[1])){buildArray[i]=cn[cv[k][l][j]]} 
     }
   }
 }
+
