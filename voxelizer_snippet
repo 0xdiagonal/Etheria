@@ -1,0 +1,6 @@
+// Code snippet to add to top of voxelizer output to minimise distortion to the original shape(see https://etheriavoxelizer.com/)
+
+y = Math.round(y*(Math.sqrt(3))/2); z = Math.round(z/1.6); // Normalise y and z dimensions to units of x 
+x+=0; // Change value to shift along x axis
+y+=0; // Ditto for y
+z+=0 // Ditto for z
