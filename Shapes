@@ -1,7 +1,14 @@
-let [xn,yn,zn]=nmax(x,y,z);
+let [X,Y,Z]=axnm(x,y,z);
+let [x1,y1,x2,y2]=axsix(X,y);
+if(x2>-0.5&&x2<1&&z<2){buildArray[i]=35}
+if(x1>-0.5&&x1<1&&z<2){buildArray[i]=33}
+if(y2>-1&&y2<1&&z<2){buildArray[i]=35}
+if(y1>-1&&y1<1&&z<2){buildArray[i]=33}
+if(y>-1&&y<1&&z<2){buildArray[i]=59}
+if(X>-0.5&&X<1&&z<2){buildArray[i]=59}
 //zn+=2*Math.cos(y/2)
 let c0=[0,0,8]; // Centre of shape
-let c=[xn,yn,zn]; // Coordinate
+let c=[X,Y,Z]; // Coordinate
 let r=14;
 let t = 3; // Wall thickness (r = filled)
 let l = [12,12,12] //
@@ -11,7 +18,7 @@ ethsphere(c,c0,r,t,2) // Create sphere
 //randcol() // Randomise colours
 //ethcube(c,c0,l,t,0) // Create sphere
 //ethplane(z+4*Math.cos(y/4)+4*Math.cos(x/2),10,3,6)
-ethtube([xn,yn,zn],c0,14,3,4,10)
+ethtube([X,Y,Z],c0,14,3,4,10)
 
 //ethnut([x,yn,zn],[0,0,20],16,12,4,6)
 
@@ -48,11 +55,18 @@ function ethpyramid(){}
 function ethhex(){}
 
 // Other functions
-function nmax(x,y,z){
+function axnm(x,y,z){
     let xn = x + 0.5*(Math.abs(y)%2);
     let yn = y*(Math.sqrt(3))/2;; 
     let zn = z/1.6; // Normalise y and z dimensions to units of x
   return [xn,yn,zn]
+}
+
+function axsix(x,y){
+  let x1=y+x/1.5; let y1=x-y/2;
+  let x2=y-x/1.5; let y2=-x-y/2;
+  return [x1,y1,x2,y2]
+
 }
 function randcol(p,k){ // Recolour with colours p and probability k
   if (buildArray[i]>0){
