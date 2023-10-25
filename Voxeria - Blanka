@@ -1,37 +1,35 @@
-let cv=[[]];
-cv[0][0]=[1,1,0,0,0,2,2,0];
-cv[0][1]=[4,1,1,0,5,5,2,2];
-cv[0][2]=[1,1,1,2,2,5,0,2];
-cv[0][3]=[1,1,2,4,1,1,1,0];
-cv[0][4]=[1,1,2,1,1,1,2,0];
-cv[0][5]=[3,3,3,1,1,6,1,0];
-cv[0][6]=[0,4,3,3,1,1,1,0];
-cv[0][7]=[4,3,3,3,3,3,4,0]; 
+let p=[0,15,14,18,4,22,40]; // Select colours from the palette
+let v=[[]]; // Assign colours to voxels
+v[0][0]=[1,1,0,0,0,2,2,0];
+v[0][1]=[4,1,1,0,5,5,2,2];
+v[0][2]=[1,1,1,2,2,5,0,2];
+v[0][3]=[1,1,2,4,1,1,1,0];
+v[0][4]=[1,1,2,1,1,1,2,0];
+v[0][5]=[3,3,3,1,1,6,1,0];
+v[0][6]=[0,4,3,3,1,1,1,0];
+v[0][7]=[4,3,3,3,3,3,4,0]; 
 
-//cv=[[],[],[],[],[],[],[],[]];
-//cv[0][0]=[1,1,0,0,0,2,2,0];
-//cv[1][0]=[4,1,1,0,5,5,2,2];
-//cv[2][0]=[1,1,1,2,2,5,0,2];
-//cv[3][0]=[1,1,2,4,1,1,1,0];
-//cv[4][0]=[1,1,2,1,1,1,2,0];
-//cv[5][0]=[3,3,3,1,1,6,1,0];
-//cv[6][0]=[0,4,3,3,1,1,1,0];
-//cv[7][0]=[4,3,3,3,3,3,4,0]; 
+let d=[8,8,8]; // Voxel dimensions [x,y,z]
+let o=[0,1,2] // For swapping dimensions
+let c0=[0,0,0]; // Shift location
 
-let cn=[0,15,14,18,4,22,40]; // Select colours from the palette
+voxeria(p,v,c0,d,o)
 
-let d=[8,8,8]; // Dimensions [x,y,z]
-let o=[0,1,2] // For swapping dimensions (Not working)
+function voxeria(p,cv,c0,d,o){
 
-  // Assign colours to voxels (loops x=>y=>z)
+  let np=[cv[0][0].length,cv.length,cv[0].length]; // Number of voxels [x,y,z]
+  d=[d[o[0]],d[o[1]],d[o[2]]]; // Dimension swapping
+  c0=[c0[0]-np[o[0]]*d[o[0]]/2,c0[1]-np[o[1]]*d[o[1]]/2,c0[2]-0]; 
+  c0=[c0[o[0]],c0[o[1]],c0[o[2]]]; // Shift location
+  y = y*(Math.sqrt(3))/2; z = z/1.6; // Normalise y and z dimensions to units of x
+  let c=[x,y,z];
+  c=[c[o[0]],c[o[1]],c[o[2]]];
 
-let np=[cv[0][0].length,cv.length,cv[0].length]; // Number of pixels [x,y,z]
-let s=[-np[0]*d[0]/2,-np[1]*d[1]/2,0]; // Shift location
-y = y*(Math.sqrt(3))/2; z = z/1.6; // Normalise y and z dimensions to units of x
-for (let l=0;l<np[o[2]];l++){
-  for (let k=0;k<np[o[1]];k++){
-    for (let j=0;j<np[o[0]];j++){
-  if (z>=(d[2]*l+s[2])&&(z<d[2]*(l+1)+s[2])&&x>=(d[0]*j+s[0])&&x<(d[0]*(j+1)+s[0])&&y>=(d[1]*k+s[1])&&y<(d[1]*(k+1)+s[1])){buildArray[i]=cn[cv[k][l][j]]} 
+  for (let l=0;l<np[2];l++){
+    for (let k=0;k<np[1];k++){
+      for (let j=0;j<np[0];j++){
+      if (c[2]>=(d[2]*l+c0[2])&&(c[2]<d[2]*(l+1)+c0[2])&&c[0]>=(d[0]*j+c0[0])&&c[0]<(d[0]*(j+1)+c0[0])&&c[1]>=(d[1]*k+c0[1])&&c[1]<(d[1]*(k+1)+c0[1])){buildArray[i]=p[v[k][l][j]]} 
+      }
     }
   }
 }
